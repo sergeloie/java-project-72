@@ -53,7 +53,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: cd app && ./gradlew build sonar --info
 
-	- name: Publish code coverage
+      - name: Publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
