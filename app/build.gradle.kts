@@ -19,15 +19,15 @@ repositories {
     mavenCentral()
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(20))
-    }
-}
-
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(20)
-}
+//java {
+//    toolchain {
+//        languageVersion.set(JavaLanguageVersion.of(20))
+//    }
+//}
+//
+//tasks.withType<JavaCompile>().configureEach {
+//    options.release.set(20)
+//}
 
 
 dependencies {
