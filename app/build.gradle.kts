@@ -19,20 +19,20 @@ repositories {
     mavenCentral()
 }
 
-//java {
-//    toolchain {
-//        languageVersion.set(JavaLanguageVersion.of(20))
-//    }
-//}
-//
-//tasks.withType<JavaCompile>().configureEach {
-//    options.release.set(20)
-//}
-
-
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+    implementation("org.apache.commons:commons-text:1.11.0")
+    implementation("gg.jte:jte:3.1.6")
+    implementation("org.slf4j:slf4j-simple:2.1.0-alpha1")
+
+    implementation("io.javalin:javalin:5.6.3")
+    implementation("io.javalin:javalin-bundle:5.6.3")
+    implementation("io.javalin:javalin-rendering:5.6.3")
+
+
 }
 
 tasks.test {
