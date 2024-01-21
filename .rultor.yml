@@ -1,5 +1,9 @@
 docker:
   image: yegor256/rultor-image
+install:
+  - "sudo apt-get install openjdk-20-jdk"
+env:
+  JAVA_HOME: /usr/lib/jvm/java-20-openjdk-amd64
 merge:
  script:
    make check
