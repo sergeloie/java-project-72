@@ -9,6 +9,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("org.sonarqube") version "4.4.1.3373"
 
+
 }
 
 group = "hexlet.code"
@@ -18,8 +19,19 @@ repositories {
     mavenCentral()
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(20))
+    }
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(20)
+}
+
+
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
+    testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
