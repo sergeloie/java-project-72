@@ -14,7 +14,7 @@ report:
 	@./gradlew jacocoTestReport
 
 check:
-    @./gradlew check
+	@./gradlew check
 	
 asciinema:
 	./build/install/app/bin/app -h
