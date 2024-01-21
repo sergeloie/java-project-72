@@ -53,3 +53,7 @@ sonar {
         property("sonar.host.url", "https://sonarcloud.io")
     }
 }
+
+application {
+    mainClass.set("hexlet.code.Main")
+}
