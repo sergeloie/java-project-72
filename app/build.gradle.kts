@@ -68,7 +68,7 @@ dependencyManagement {
             entry("javalin-rendering")
         }
         dependency("gg.jte:jte:3.1.6")
-        dependency("org.assertj:assertj-core:3.24.2")
+        dependency("org.assertj:assertj-core:3.25.1")
         dependency("com.fasterxml.jackson.core:jackson-databind:2.16.1")
         dependency("org.apache.commons:commons-text:1.11.0")
         dependency("org.slf4j:slf4j-simple:2.1.0-alpha1")
