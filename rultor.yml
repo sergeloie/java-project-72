@@ -1,0 +1,7 @@
+docker:
+  image: yegor256/rultor-image
+merge:
+ script:
+   make check
+   
+
