@@ -2,6 +2,8 @@ package hexlet.code;
 
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +31,7 @@ public final class AppTest {
     @Test
     public void testMainPage() {
         JavalinTest.test(app, (server, client) -> {
-            var response = client.get("/");
+            var response = client.get(NamedRoutes.ROOT_PATH);
             assertThat(response.code()).isEqualTo(200);
             assert response.body() != null;
             assertThat(response.body().string()).contains("Hello World");
