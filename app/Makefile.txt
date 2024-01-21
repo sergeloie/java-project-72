@@ -13,7 +13,7 @@ build:
 report:
 	@./gradlew jacocoTestReport
 
-check
+check:
     @./gradlew check
 	
 asciinema:

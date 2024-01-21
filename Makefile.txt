@@ -13,7 +13,7 @@ report:
 lint:
 	make -C app lint
 
-check
+check:
     make -C app check
 
 .PHONY: build
