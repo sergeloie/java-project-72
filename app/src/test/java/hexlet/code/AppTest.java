@@ -24,12 +24,12 @@ public final class AppTest {
     }
 
     @Test
-    public void dummyTest() {
+    void dummyTest() {
         assertTrue(true);
     }
 
     @Test
-    public void testMainPage() {
+    void testMainPage() {
         JavalinTest.test(app, (server, client) -> {
             var response = client.get(NamedRoutes.ROOT_PATH);
             assertThat(response.code()).isEqualTo(200);

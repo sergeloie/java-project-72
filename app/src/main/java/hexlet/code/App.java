@@ -13,11 +13,10 @@ public class App {
 
     public static Javalin getApp() {
 
-        var app = Javalin.create(config -> {
-            config.plugins.enableDevLogging();
-        });
+        var app = Javalin.create(config -> config.plugins.enableDevLogging());
 
         app.get(NamedRoutes.ROOT_PATH, RootController::show);
+
         return app;
     }
 

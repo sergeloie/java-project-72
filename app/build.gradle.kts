@@ -8,6 +8,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.50.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("org.sonarqube") version "4.4.1.3373"
+    id("io.spring.dependency-management") version "1.1.4"
 
 
 }
@@ -22,16 +23,16 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.assertj:assertj-core:3.24.2")
+    testImplementation("org.assertj:assertj-core")
 
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
-    implementation("org.apache.commons:commons-text:1.11.0")
-    implementation("gg.jte:jte:3.1.6")
-    implementation("org.slf4j:slf4j-simple:2.1.0-alpha1")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("org.apache.commons:commons-text")
+    implementation("gg.jte:jte")
+    implementation("org.slf4j:slf4j-simple")
 
-    implementation("io.javalin:javalin:5.6.3")
-    implementation("io.javalin:javalin-bundle:5.6.3")
-    implementation("io.javalin:javalin-rendering:5.6.3")
+    implementation("io.javalin:javalin")
+    implementation("io.javalin:javalin-bundle")
+    implementation("io.javalin:javalin-rendering")
 
 
 }
@@ -57,4 +58,19 @@ sonar {
 
 application {
     mainClass.set("hexlet.code.App")
+}
+
+dependencyManagement {
+    dependencies {
+        dependencySet("io.javalin:5.6.3") {
+            entry("javalin")
+            entry("javalin-bundle")
+            entry("javalin-rendering")
+        }
+        dependency("gg.jte:jte:3.1.6")
+        dependency("org.assertj:assertj-core:3.24.2")
+        dependency("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+        dependency("org.apache.commons:commons-text:1.11.0")
+        dependency("org.slf4j:slf4j-simple:2.1.0-alpha1")
+    }
 }
