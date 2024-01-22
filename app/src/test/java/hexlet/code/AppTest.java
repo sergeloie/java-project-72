@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //import org.junit.jupiter.api.BeforeAll;
@@ -39,5 +40,17 @@ public final class AppTest {
             assert response.body() != null;
             assertThat(response.body().string()).contains("Hello World");
         });
+    }
+
+    @Test
+    public void testGetPort() {
+        String defaultPort = String.valueOf(App.getPort());
+        assertEquals("7070", defaultPort);
+    }
+
+    @Test
+    public void testGetDatabaseUrl() {
+        String defaultUrl = App.getDatabaseUrl();
+        assertEquals("jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;", defaultUrl);
     }
 }

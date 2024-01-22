@@ -25,7 +25,6 @@ public class App {
     public static Javalin getApp() throws SQLException {
 
         HikariConfig hikariConfig = new HikariConfig();
-//        hikariConfig.setJdbcUrl("jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;");
         hikariConfig.setJdbcUrl(getDatabaseUrl());
         HikariDataSource dataSource = new HikariDataSource(hikariConfig);
         InputStream inputStream = App.class.getClassLoader().getResourceAsStream("schema.sql");
@@ -45,14 +44,13 @@ public class App {
         return app;
     }
 
-    private static int getPort() {
+    static int getPort() {
         String port = System.getenv().getOrDefault("PORT", "7070");
         return Integer.parseInt(port);
     }
 
-    private static String getDatabaseUrl() {
-        String databaseUrl = System.getenv()
+    static String getDatabaseUrl() {
+        return System.getenv()
                 .getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;");
-        return databaseUrl;
     }
 }
