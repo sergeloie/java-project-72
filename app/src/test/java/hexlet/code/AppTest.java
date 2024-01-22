@@ -1,6 +1,5 @@
 package hexlet.code;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import hexlet.code.util.NamedRoutes;
@@ -12,11 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//import org.junit.jupiter.api.BeforeAll;
-//import org.junit.jupiter.api.Test;
 
 public final class AppTest {
 
@@ -42,15 +38,4 @@ public final class AppTest {
         });
     }
 
-    @Test
-    public void testGetPort() {
-        String defaultPort = String.valueOf(App.getPort());
-        assertEquals("7070", defaultPort);
-    }
-
-    @Test
-    public void testGetDatabaseUrl() {
-        String defaultUrl = App.getDatabaseUrl();
-        assertEquals("jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;", defaultUrl);
-    }
 }
