@@ -34,6 +34,11 @@ dependencies {
     implementation("io.javalin:javalin-bundle")
     implementation("io.javalin:javalin-rendering")
 
+    implementation("com.zaxxer:HikariCP")
+    implementation("com.h2database:h2")
+
+
+
 
 }
 
@@ -72,5 +77,9 @@ dependencyManagement {
         dependency("com.fasterxml.jackson.core:jackson-databind:2.16.1")
         dependency("org.apache.commons:commons-text:1.11.0")
         dependency("org.slf4j:slf4j-simple:2.1.0-alpha1")
+        dependency("com.zaxxer:HikariCP:5.1.0")
+        dependency("com.h2database:h2:2.2.224")
+
+
     }
 }
