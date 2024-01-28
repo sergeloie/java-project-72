@@ -1,6 +1,6 @@
 package hexlet.code.util;
 
-public class Constants {
+public class ResourceRoutes {
 
 
     public static final String BOOTSTRAP_LINK =

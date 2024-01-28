@@ -3,6 +3,7 @@ package hexlet.code;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import hexlet.code.controller.RootController;
+import hexlet.code.controller.UrlController;
 import hexlet.code.repository.BaseRepository;
 import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
@@ -20,10 +21,13 @@ import gg.jte.TemplateEngine;
 import io.javalin.rendering.template.JavalinJte;
 import gg.jte.resolve.ResourceCodeResolver;
 
+import static io.javalin.apibuilder.ApiBuilder.crud;
+
 public class App {
     public static void main(String[] args) throws SQLException {
 
         Javalin app = getApp();
+        setRoutes(app);
         app.start(getPort());
     }
 
@@ -46,7 +50,7 @@ public class App {
 
         Javalin app = Javalin.create(config -> config.plugins.enableDevLogging());
         JavalinJte.init(createTemplateEngine());
-        app.get(NamedRoutes.ROOT_PATH, RootController::show);
+
         return app;
     }
 
@@ -65,4 +69,16 @@ public class App {
         ResourceCodeResolver codeResolver = new ResourceCodeResolver("templates", classLoader);
         return TemplateEngine.create(codeResolver, ContentType.Html);
     }
+
+    private static void setRoutes(Javalin app) {
+
+        app.get(NamedRoutes.ROOT_PATH, RootController::show);
+
+        app.routes(() -> {
+            crud("urls/{url-id}", new UrlController());
+        });
+
+    }
+
+
 }
