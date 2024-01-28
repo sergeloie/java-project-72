@@ -1,3 +1,3 @@
 @template.layout.page(content = @`
-    <h1>Main Page</h1>
+    <h1 class="text-center">Main Page</h1>
 `)
