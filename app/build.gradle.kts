@@ -38,6 +38,8 @@ dependencies {
 
     implementation("com.zaxxer:HikariCP")
     implementation("com.h2database:h2")
+    implementation("org.postgresql:postgresql")
+
 
 
 
@@ -83,6 +85,8 @@ dependencyManagement {
         dependency("org.slf4j:slf4j-simple:2.1.0-alpha1")
         dependency("com.zaxxer:HikariCP:5.1.0")
         dependency("com.h2database:h2:2.2.224")
+        dependency("org.postgresql:postgresql:42.7.1")
+
 
     }
 }
