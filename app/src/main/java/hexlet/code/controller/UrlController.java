@@ -19,6 +19,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Collections;
 
+import static hexlet.code.util.ResourceRoutes.*;
+
 public class UrlController implements CrudHandler {
     /**
      * @param context
@@ -27,41 +29,23 @@ public class UrlController implements CrudHandler {
     @Override
     public void create(@NotNull Context context) {
         String string = context.formParam("url");
-
-/*        if (Utilities.isValidUrl(string)) {
-            URI uri = new URI(string);
-            String name = Utilities.uriToString(uri);
-            if (UrlRepository.find(name).isPresent()) {
-                context.sessionAttribute("flash", "Страница уже существует");
-                context.sessionAttribute("flashType", "alert");
-                context.redirect(NamedRoutes.ROOT_PATH);
-            }
-            Url urlToSave = new Url(name, Timestamp.valueOf(LocalDateTime.now()));
-            UrlRepository.save(urlToSave);
-            context.sessionAttribute("flash", "Страница успешно добавлена");
-            context.sessionAttribute("flashType", "success");
-            context.redirect(NamedRoutes.ROOT_PATH);
-        } else {
-            context.sessionAttribute("flash", "Некорректный URL");
-            context.sessionAttribute("flashType", "alert");
-            context.redirect(NamedRoutes.ROOT_PATH);
-
-        }*/
         try {
             URI uri = new URL(string).toURI();
             String name = Utilities.uriToString(uri);
-            if (UrlRepository.find(name).isPresent()) {
-                context.sessionAttribute("flash", "Страница уже существует");
+            boolean check = UrlRepository.find(name).isPresent();
+            if (check) {
+                context.sessionAttribute("flash", pageExist);
                 context.sessionAttribute("flashType", "danger");
                 context.redirect(NamedRoutes.ROOT_PATH);
+                return;
             }
             Url urlToSave = new Url(name, Timestamp.valueOf(LocalDateTime.now()));
             UrlRepository.save(urlToSave);
-            context.sessionAttribute("flash", "Страница успешно добавлена");
+            context.sessionAttribute("flash", pageAdded);
             context.sessionAttribute("flashType", "success");
             context.redirect(NamedRoutes.ROOT_PATH);
         } catch (URISyntaxException | MalformedURLException e) {
-            context.sessionAttribute("flash", "Некорректный URL");
+            context.sessionAttribute("flash", incorrectUrl);
             context.sessionAttribute("flashType", "danger");
             context.redirect(NamedRoutes.ROOT_PATH);
         } catch (SQLException e) {

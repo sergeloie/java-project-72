@@ -11,7 +11,7 @@
         </div>
     @endif
 
-    <div class="container">
+    <div>
     <form action="${NamedRoutes.URL_PATH}" method="post">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Input site name</span>
