@@ -1,6 +1,7 @@
 @import hexlet.code.dto.url.UrlsPage
 @import hexlet.code.model.Url
 @import hexlet.code.util.NamedRoutes
+@import static hexlet.code.util.NamedRoutes.getUrlPath
 @param UrlsPage page
 
 
@@ -13,7 +14,7 @@
                     ${url.getId()}
                 </td>
                 <td>
-                    ${url.getName()}
+                    <a href="${getUrlPath(url.getId())}">${url.getName()}</a>
                 </td>
                 <td>
                     ${url.getCreatedAt().toGMTString()}

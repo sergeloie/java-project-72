@@ -29,11 +29,11 @@ public class App {
         Javalin app = getApp();
 //        setRoutes(app);
 
-        app.get(NamedRoutes.ROOT_PATH, RootController::show);
-
-        app.routes(() -> {
-            crud("urls/{url-id}", new UrlController());
-        });
+//        app.get(NamedRoutes.ROOT_PATH, RootController::show);
+//
+//        app.routes(() -> {
+//            crud("urls/{url-id}", new UrlController());
+//        });
 
         app.start(getPort());
     }
@@ -57,8 +57,7 @@ public class App {
 
         Javalin app = Javalin.create(config -> config.plugins.enableDevLogging());
         JavalinJte.init(createTemplateEngine());
-
-
+        setRoutes(app);
         return app;
     }
 
