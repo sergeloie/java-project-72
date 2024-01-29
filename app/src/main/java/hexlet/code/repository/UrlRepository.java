@@ -14,7 +14,7 @@ public class UrlRepository extends BaseRepository{
 
     public static void save(Url url) throws SQLException {
 
-        String sql = "INSER INTO urls (NAME, CREATED_AT) VALUES (?, ?)";
+        String sql = "INSERT INTO urls (NAME, CREATED_AT) VALUES (?, ?)";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, url.getName());
@@ -51,7 +51,7 @@ public class UrlRepository extends BaseRepository{
     }
 
     public static Optional<Url> find(Long id) throws SQLException{
-        String sql = "SELECT FROM urls WHERE ID = ?";
+        String sql = "SELECT * FROM urls WHERE ID = ?";
         try (Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
@@ -68,14 +68,14 @@ public class UrlRepository extends BaseRepository{
     }
 
     public static Optional<Url> find(String name) throws SQLException{
-        String sql = "SELECT FROM urls WHERE NAME = ?";
+        String sql = "SELECT * FROM urls WHERE NAME = ?";
         try (Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
                 long id = resultSet.getLong("ID");
+                Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
                 Url url = new Url(name, timestamp);
                 url.setId(id);
                 return Optional.of(url);

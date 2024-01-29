@@ -27,6 +27,8 @@ dependencies {
 
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("org.apache.commons:commons-text")
+    implementation("commons-validator:commons-validator")
+
     implementation("gg.jte:jte")
     implementation("org.slf4j:slf4j-simple")
 
@@ -77,6 +79,7 @@ dependencyManagement {
         dependency("org.assertj:assertj-core:3.25.1")
         dependency("com.fasterxml.jackson.core:jackson-databind:2.16.1")
         dependency("org.apache.commons:commons-text:1.11.0")
+        dependency("commons-validator:commons-validator:1.8.0")
         dependency("org.slf4j:slf4j-simple:2.1.0-alpha1")
         dependency("com.zaxxer:HikariCP:5.1.0")
         dependency("com.h2database:h2:2.2.224")

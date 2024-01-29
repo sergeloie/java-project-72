@@ -1,9 +1,15 @@
 package hexlet.code.controller;
 
+import hexlet.code.dto.url.BuildUrlPage;
 import io.javalin.http.Context;
+
+import java.util.Collections;
 
 public final class RootController {
     public static void show(Context context) {
-        context.render("index.jte");
+        BuildUrlPage page = new BuildUrlPage();
+        page.setFlash(context.consumeSessionAttribute("flash"));
+        page.setFlashType(context.consumeSessionAttribute("flashType"));
+        context.render("index.jte", Collections.singletonMap("page", page));
     }
 }
