@@ -15,7 +15,6 @@ import java.util.Optional;
 
 public class UrlRepository extends BaseRepository {
 
-    private static List<Url> entities = new ArrayList<>();
 
     public static void save(Url url) throws SQLException {
 

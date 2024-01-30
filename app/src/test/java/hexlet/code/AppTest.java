@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public final class AppTest {
+final class AppTest {
 
     private Javalin app;
 

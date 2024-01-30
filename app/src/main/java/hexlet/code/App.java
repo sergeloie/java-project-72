@@ -27,14 +27,6 @@ public class App {
     public static void main(String[] args) throws SQLException {
 
         Javalin app = getApp();
-//        setRoutes(app);
-
-//        app.get(NamedRoutes.ROOT_PATH, RootController::show);
-//
-//        app.routes(() -> {
-//            crud("urls/{url-id}", new UrlController());
-//        });
-
         app.start(getPort());
     }
 
@@ -81,9 +73,6 @@ public class App {
     private static void setRoutes(Javalin app) {
 
         app.get(NamedRoutes.ROOT_PATH, RootController::show);
-
-        app.routes(() -> {
-            crud("urls/{url-id}", new UrlController());
-        });
+        app.routes(() -> crud("urls/{url-id}", new UrlController()));
     }
 }
