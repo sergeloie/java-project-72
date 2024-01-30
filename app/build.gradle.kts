@@ -24,6 +24,10 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core")
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("org.mockito:mockito-junit-jupiter")
+
+
 
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("org.apache.commons:commons-text")
@@ -77,6 +81,10 @@ dependencyManagement {
             entry("javalin-bundle")
             entry("javalin-rendering")
         }
+        dependencySet("org.mockito:5.10.0") {
+            entry("mockito-core")
+            entry("mockito-junit-jupiter")
+    }
         dependency("gg.jte:jte:3.1.6")
         dependency("org.assertj:assertj-core:3.25.1")
         dependency("com.fasterxml.jackson.core:jackson-databind:2.16.1")
