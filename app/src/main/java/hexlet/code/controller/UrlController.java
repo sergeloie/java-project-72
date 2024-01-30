@@ -57,16 +57,12 @@ public class UrlController implements CrudHandler {
         }
     }
 
-
-
-
     /**
      * @param context
      * @param s
      */
     @Override
     public void delete(@NotNull Context context, @NotNull String s) {
-
     }
 
     /**
@@ -109,6 +105,5 @@ public class UrlController implements CrudHandler {
      */
     @Override
     public void update(@NotNull Context context, @NotNull String s) {
-
     }
 }
