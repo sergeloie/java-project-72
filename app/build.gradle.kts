@@ -27,7 +27,8 @@ dependencies {
     testImplementation("org.mockito:mockito-core")
     testImplementation("org.mockito:mockito-junit-jupiter")
 
-
+    implementation("com.konghq:unirest-java")
+    implementation("com.konghq:unirest-objectmapper-jackson")
 
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("org.apache.commons:commons-text")
@@ -84,7 +85,12 @@ dependencyManagement {
         dependencySet("org.mockito:5.10.0") {
             entry("mockito-core")
             entry("mockito-junit-jupiter")
-    }
+        }
+        dependencySet("com.konghq:3.14.5") {
+            entry("unirest-java")
+            entry("unirest-objectmapper-jackson")
+
+        }
         dependency("gg.jte:jte:3.1.6")
         dependency("org.assertj:assertj-core:3.25.1")
         dependency("com.fasterxml.jackson.core:jackson-databind:2.16.1")
@@ -94,6 +100,8 @@ dependencyManagement {
         dependency("com.zaxxer:HikariCP:5.1.0")
         dependency("com.h2database:h2:2.2.224")
         dependency("org.postgresql:postgresql:42.7.1")
+
+
 
 
     }
