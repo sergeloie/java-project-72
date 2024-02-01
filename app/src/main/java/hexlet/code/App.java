@@ -3,6 +3,7 @@ package hexlet.code;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import hexlet.code.controller.RootController;
+import hexlet.code.controller.UrlCheckController;
 import hexlet.code.controller.UrlController;
 import hexlet.code.repository.BaseRepository;
 import hexlet.code.util.NamedRoutes;
@@ -73,6 +74,7 @@ public class App {
     private static void setRoutes(Javalin app) {
 
         app.get(NamedRoutes.ROOT_PATH, RootController::show);
+        app.post("urls/{url-id}/checks", UrlCheckController::create);
         app.routes(() -> crud("urls/{url-id}", new UrlController()));
     }
 }

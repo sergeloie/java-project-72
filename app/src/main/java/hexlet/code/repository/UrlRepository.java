@@ -32,7 +32,6 @@ public class UrlRepository extends BaseRepository {
                 throw new SQLException("DB have not returned an ID after saving an entity");
             }
         }
-
     }
 
     public static List<Url> getEntities() throws SQLException {

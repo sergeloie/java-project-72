@@ -26,9 +26,12 @@ dependencies {
     testImplementation("org.assertj:assertj-core")
     testImplementation("org.mockito:mockito-core")
     testImplementation("org.mockito:mockito-junit-jupiter")
+    testImplementation("com.squareup.okhttp3:mockwebserver")
+
 
     implementation("com.konghq:unirest-java")
     implementation("com.konghq:unirest-objectmapper-jackson")
+    implementation("org.jsoup:jsoup")
 
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("org.apache.commons:commons-text")
@@ -100,6 +103,9 @@ dependencyManagement {
         dependency("com.zaxxer:HikariCP:5.1.0")
         dependency("com.h2database:h2:2.2.224")
         dependency("org.postgresql:postgresql:42.7.1")
+        dependency("com.squareup.okhttp3:mockwebserver:4.12.0")
+        dependency("org.jsoup:jsoup:1.17.2")
+
 
 
 
