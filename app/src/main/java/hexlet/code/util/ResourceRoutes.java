@@ -12,6 +12,9 @@ public class ResourceRoutes {
     public static final String PAGE_ADDED = "Страница успешно добавлена";
     public static final String INCORRECT_URL = "Некорректный URL";
 
+    public static final String INCORRECT_ADDRESS = "Некорректный адрес";
+    public static final String CHECK_ADDED = "Страница успешно проверена";
+
     public static final String FLASH = "flash";
     public static final String FLASH_TYPE = "flashType";
 }

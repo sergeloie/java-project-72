@@ -2,6 +2,7 @@
 @import hexlet.code.model.Url
 @import hexlet.code.util.NamedRoutes
 @import static hexlet.code.util.NamedRoutes.getUrlPath
+@import static hexlet.code.util.Utilities.getPrettyDate
 @param UrlsPage page
 
 
@@ -17,7 +18,7 @@
                     <a href="${getUrlPath(url.getId())}">${url.getName()}</a>
                 </td>
                 <td>
-                    ${url.getCreatedAt().toGMTString()}
+                    ${getPrettyDate(url.getCreatedAt())}
                 </td>
             </tr>
         @endfor

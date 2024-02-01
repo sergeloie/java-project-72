@@ -1,14 +1,14 @@
-DROP TABLE IF EXISTS urls;
+-- DROP TABLE IF EXISTS urls;
 
-CREATE TABLE urls (
+CREATE TABLE if not exists urls (
     ID SERIAL PRIMARY KEY,
     NAME VARCHAR(255),
     CREATED_AT TIMESTAMP
 );
 
-DROP TABLE IF EXISTS url_check;
+-- DROP TABLE IF EXISTS url_check;
 
-CREATE TABLE url_check (
+CREATE TABLE if not exists url_check (
     ID SERIAL PRIMARY KEY,
     STATUS_CODE INT,
     TITLE VARCHAR(255),

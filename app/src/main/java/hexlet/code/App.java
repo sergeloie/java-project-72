@@ -49,6 +49,7 @@ public class App {
         BaseRepository.dataSource = dataSource;
 
         Javalin app = Javalin.create(config -> config.plugins.enableDevLogging());
+        app.before(ctx -> ctx.contentType("text/html; charset=utf-8"));
         JavalinJte.init(createTemplateEngine());
         setRoutes(app);
         return app;
