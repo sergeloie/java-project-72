@@ -2,7 +2,10 @@ package hexlet.code.controller;
 
 import hexlet.code.dto.url.UrlPage;
 import hexlet.code.dto.url.UrlsPage;
+import hexlet.code.dto.urlcheck.UrlChecksPage;
 import hexlet.code.model.Url;
+import hexlet.code.model.UrlCheck;
+import hexlet.code.repository.UrlCheckRepository;
 import hexlet.code.repository.UrlRepository;
 import hexlet.code.util.Utilities;
 import io.javalin.apibuilder.CrudHandler;
@@ -17,8 +20,10 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static hexlet.code.util.NamedRoutes.ROOT_PATH;
 import static hexlet.code.util.ResourceRoutes.FLASH;
@@ -39,8 +44,8 @@ public class UrlController implements CrudHandler {
         try {
             URI uri = new URL(string).toURI();
             String name = Utilities.uriToString(uri);
-            boolean check = UrlRepository.find(name).isPresent();
-            if (check) {
+//            boolean check = UrlRepository.find(name).isPresent();
+            if (UrlRepository.find(name).isPresent()) {
                 context.sessionAttribute(FLASH, PAGE_EXIST);
                 context.sessionAttribute(FLASH_TYPE, "danger");
                 context.redirect(ROOT_PATH);
@@ -81,7 +86,7 @@ public class UrlController implements CrudHandler {
         } catch (SQLException e) {
             System.out.println(e.getSQLState());
         }
-        var page = new UrlsPage(urls);
+        UrlsPage page = new UrlsPage(urls);
         context.render("url/index.jte", Collections.singletonMap("page", page));
 
     }
@@ -92,15 +97,23 @@ public class UrlController implements CrudHandler {
      */
     @Override
     public void getOne(@NotNull Context context, @NotNull String s) {
-        Long id = context.pathParamAsClass("url-id", Long.class).get();
+        int id = context.pathParamAsClass("url-id", Integer.class).get();
         Url url = null;
+        List<UrlCheck> urlChecks = new ArrayList<>();
         try {
             url = UrlRepository.find(id).orElseThrow(() -> new NotFoundResponse("Url with ID: " + id + " not found"));
         } catch (SQLException e) {
-            System.out.println(e.getSQLState());
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            urlChecks = UrlCheckRepository.getEntities(id);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         UrlPage page = new UrlPage(url);
-        context.render("url/show.jte", Collections.singletonMap("page", page));
+        UrlChecksPage urlChecksPage = new UrlChecksPage(urlChecks);
+        context.render("url/show.jte", Map.of("page", page, "urlChecksPage", urlChecksPage));
     }
 
     /**

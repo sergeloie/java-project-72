@@ -3,6 +3,7 @@ package hexlet.code;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import hexlet.code.controller.RootController;
+import hexlet.code.controller.UrlCheckController;
 import hexlet.code.controller.UrlController;
 import hexlet.code.repository.BaseRepository;
 import hexlet.code.util.NamedRoutes;
@@ -48,6 +49,7 @@ public class App {
         BaseRepository.dataSource = dataSource;
 
         Javalin app = Javalin.create(config -> config.plugins.enableDevLogging());
+        app.before(ctx -> ctx.contentType("text/html; charset=utf-8"));
         JavalinJte.init(createTemplateEngine());
         setRoutes(app);
         return app;
@@ -73,6 +75,7 @@ public class App {
     private static void setRoutes(Javalin app) {
 
         app.get(NamedRoutes.ROOT_PATH, RootController::show);
+        app.post("urls/{url-id}/checks", UrlCheckController::create);
         app.routes(() -> crud("urls/{url-id}", new UrlController()));
     }
 }
