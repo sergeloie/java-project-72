@@ -3,14 +3,23 @@ package hexlet.code;
 // No new imports needed - using JUnit
 
 import hexlet.code.model.Url;
+import io.javalin.Javalin;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class UrlTest {
+    private Javalin app;
+
+    @BeforeEach
+    public final void setUp() throws SQLException {
+        app = App.getApp();
+    }
 
     @Test
     public void testUrlConstructor() {

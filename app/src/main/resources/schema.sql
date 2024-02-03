@@ -1,4 +1,3 @@
--- DROP TABLE IF EXISTS urls;
 
 CREATE TABLE if not exists urls (
     ID SERIAL PRIMARY KEY,
@@ -6,7 +5,7 @@ CREATE TABLE if not exists urls (
     CREATED_AT TIMESTAMP
 );
 
--- DROP TABLE IF EXISTS url_check;
+
 
 CREATE TABLE if not exists url_check (
     ID SERIAL PRIMARY KEY,

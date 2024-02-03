@@ -24,8 +24,8 @@ public class UrlCheckController {
 
     public static void create(Context context) throws SQLException {
 
-        String address = context.formParam("address");
-        long urlId = UrlRepository.find(address).get().getId();
+        long urlId = context.pathParamAsClass("url-id", Long.class).get();
+        String address = UrlRepository.find(urlId).get().getName();
 
         HttpResponse<String> response = Unirest.get(address).asString();
 

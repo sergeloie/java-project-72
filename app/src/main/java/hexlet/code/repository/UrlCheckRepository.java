@@ -42,6 +42,7 @@ public class UrlCheckRepository extends BaseRepository {
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setLong(1, urlId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

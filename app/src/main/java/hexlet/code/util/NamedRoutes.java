@@ -7,5 +7,8 @@ public final class NamedRoutes {
     public static String getUrlPath(Long id) {
         return URL_PATH + "/" + id;
     }
+    public static String getUrlCheck(Long id) {
+        return URL_PATH + "/" + id + "/checks";
+    }
 
 }
