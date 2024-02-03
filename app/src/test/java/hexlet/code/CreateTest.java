@@ -22,11 +22,9 @@ public class CreateTest {
 
     private final Context context = mock(Context.class);
 
-    private Javalin app;
-
     @BeforeEach
     public final void setUp() throws SQLException {
-        app = App.getApp();
+        Javalin app = App.getApp();
     }
 
     @Test
@@ -36,7 +34,7 @@ public class CreateTest {
         when(context.sessionAttribute("flashType")).thenReturn("success");
         controller.create(context);
         assertTrue(UrlRepository.find("https://example.com").isPresent());
-        assertTrue(UrlRepository.find(1L).isPresent());
+        assertTrue(UrlRepository.find(1).isPresent());
         assertEquals("https://example.com", UrlRepository.getEntities().get(0).getName());
         assertEquals("success", context.sessionAttribute("flashType"));
     }

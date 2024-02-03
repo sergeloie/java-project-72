@@ -12,12 +12,12 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 public class UrlCheck {
-    Long id;
-    @NonNull Long statusCode;
+    Integer id;
+    @NonNull Integer statusCode;
     @NonNull String title;
     @NonNull String h1;
     @NonNull String description;
-    @NonNull Long urlId;
+    @NonNull Integer urlId;
     @NonNull Timestamp createdAt;
 
 

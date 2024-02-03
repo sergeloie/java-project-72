@@ -45,18 +45,18 @@ final class AppTest {
     @Test
     void testUrlsPage() throws Exception {
         JavalinTest.test(app, (server, client) -> {
-            var response = client.get("/urls");
+            Response response = client.get("/urls");
             assertThat(response.code()).isEqualTo(200);
         });
     }
 
     @Test
     void testUrlPage() throws SQLException {
-        var url = new Url("https://anseranser.ru", Timestamp.valueOf(LocalDateTime.now()));
+        Url url = new Url("https://anseranser.ru", Timestamp.valueOf(LocalDateTime.now()));
         UrlRepository.save(url);
         JavalinTest.test(app, (server, client) -> {
-            var response = client.get("/urls/" + url.getId());
-            var response2 = client.get("/urls");
+            Response response = client.get("/urls/" + url.getId());
+            Response response2 = client.get("/urls");
             assertThat(response.code()).isEqualTo(200);
             assertThat(response2.body().string()).contains("https://anseranser.ru");
         });

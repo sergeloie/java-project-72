@@ -4,28 +4,45 @@ package hexlet.code;
 
 import hexlet.code.model.Url;
 import io.javalin.Javalin;
+import okhttp3.mockwebserver.MockWebServer;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class UrlTest {
-    private Javalin app;
+public final class UrlTest {
+
+    private static Javalin app;
+    private static MockWebServer mockWebServer;
+    private static String baseUrl;
 
     @BeforeEach
-    public final void setUp() throws SQLException {
+    public void setUp() throws SQLException, IOException {
         app = App.getApp();
+        app.start(7070);
+        baseUrl = "http://localhost:7070";
+
+        mockWebServer = new MockWebServer();
+    }
+
+    @AfterEach
+    public void tearDown() throws IOException {
+        app.stop();
+        mockWebServer.shutdown();
     }
 
     @Test
     public void testUrlConstructor() {
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
         Url url = new Url("test", timestamp);
-        url.setId(10L);
+        url.setId(10);
 
         assertNotNull(url.getId());
         assertEquals("test", url.getName());

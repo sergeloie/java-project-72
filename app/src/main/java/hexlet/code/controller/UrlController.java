@@ -86,7 +86,7 @@ public class UrlController implements CrudHandler {
         } catch (SQLException e) {
             System.out.println(e.getSQLState());
         }
-        var page = new UrlsPage(urls);
+        UrlsPage page = new UrlsPage(urls);
         context.render("url/index.jte", Collections.singletonMap("page", page));
 
     }
@@ -97,7 +97,7 @@ public class UrlController implements CrudHandler {
      */
     @Override
     public void getOne(@NotNull Context context, @NotNull String s) {
-        Long id = context.pathParamAsClass("url-id", Long.class).get();
+        int id = context.pathParamAsClass("url-id", Integer.class).get();
         Url url = null;
         List<UrlCheck> urlChecks = new ArrayList<>();
         try {

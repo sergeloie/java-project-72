@@ -24,7 +24,7 @@ public class UrlCheckController {
 
     public static void create(Context context) throws SQLException {
 
-        long urlId = context.pathParamAsClass("url-id", Long.class).get();
+        int urlId = context.pathParamAsClass("url-id", Integer.class).get();
         String address = UrlRepository.find(urlId).get().getName();
 
         HttpResponse<String> response = Unirest.get(address).asString();
@@ -34,7 +34,7 @@ public class UrlCheckController {
             context.sessionAttribute(FLASH_TYPE, "danger");
             context.redirect(getUrlPath(urlId));
         }).ifSuccess(response1 -> {
-            long statusCode = response.getStatus();
+            int statusCode = response.getStatus();
             Document document = Jsoup.parse(response.getBody());
             String title = document.title();
             Element elementH1 = document.selectFirst("h1");

@@ -1,4 +1,3 @@
-
 CREATE TABLE if not exists urls (
     ID SERIAL PRIMARY KEY,
     NAME VARCHAR(255),

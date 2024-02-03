@@ -18,36 +18,36 @@ public class UrlCheckRepository extends BaseRepository {
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setLong(1, urlCheck.getStatusCode());
+            preparedStatement.setInt(1, urlCheck.getStatusCode());
             preparedStatement.setString(2, urlCheck.getTitle());
             preparedStatement.setString(3, urlCheck.getH1());
             preparedStatement.setString(4, urlCheck.getDescription());
-            preparedStatement.setLong(5, urlCheck.getUrlId());
+            preparedStatement.setInt(5, urlCheck.getUrlId());
             preparedStatement.setTimestamp(6, urlCheck.getCreatedAt());
 
             preparedStatement.executeUpdate();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
-                urlCheck.setId(generatedKeys.getLong(1));
+                urlCheck.setId(generatedKeys.getInt(1));
             } else {
                 throw new SQLException("DB have not returned an ID after saving an entity");
             }
         }
     }
 
-    public static List<UrlCheck> getEntities(Long urlId) throws SQLException {
+    public static List<UrlCheck> getEntities(int urlId) throws SQLException {
         String sql = "SELECT * FROM url_check WHERE URL_ID = ?";
         List<UrlCheck> result = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setLong(1, urlId);
+            preparedStatement.setInt(1, urlId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                long id = resultSet.getLong("ID");
-                long statusCode = resultSet.getLong("STATUS_CODE");
+                int id = resultSet.getInt("ID");
+                int statusCode = resultSet.getInt("STATUS_CODE");
                 String title = resultSet.getString("TITLE");
                 String h1 = resultSet.getString("H1");
                 String description = resultSet.getString("DESCRIPTION");

@@ -27,7 +27,7 @@ public class UrlRepository extends BaseRepository {
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
-                url.setId(generatedKeys.getLong(1));
+                url.setId(generatedKeys.getInt(1));
             } else {
                 throw new SQLException("DB have not returned an ID after saving an entity");
             }
@@ -42,7 +42,7 @@ public class UrlRepository extends BaseRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                long id = resultSet.getLong("ID");
+                int id = resultSet.getInt("ID");
                 String name = resultSet.getString("NAME");
                 Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
                 Url url = new Url(name, timestamp);
@@ -53,11 +53,11 @@ public class UrlRepository extends BaseRepository {
         return result;
     }
 
-    public static Optional<Url> find(Long id) throws SQLException {
+    public static Optional<Url> find(int id) throws SQLException {
         String sql = "SELECT * FROM urls WHERE ID = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setLong(1, id);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 String name = resultSet.getString("NAME");
@@ -77,7 +77,7 @@ public class UrlRepository extends BaseRepository {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                long id = resultSet.getLong("ID");
+                int id = resultSet.getInt("ID");
                 Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
                 Url url = new Url(name, timestamp);
                 url.setId(id);

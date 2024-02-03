@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class Url {
-    private Long id;
+    private Integer id;
     @NonNull private String name;
     @NonNull private Timestamp createdAt;
 }
