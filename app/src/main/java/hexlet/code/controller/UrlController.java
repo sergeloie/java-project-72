@@ -44,8 +44,8 @@ public class UrlController implements CrudHandler {
         try {
             URI uri = new URL(string).toURI();
             String name = Utilities.uriToString(uri);
-            boolean check = UrlRepository.find(name).isPresent();
-            if (check) {
+//            boolean check = UrlRepository.find(name).isPresent();
+            if (UrlRepository.find(name).isPresent()) {
                 context.sessionAttribute(FLASH, PAGE_EXIST);
                 context.sessionAttribute(FLASH_TYPE, "danger");
                 context.redirect(ROOT_PATH);

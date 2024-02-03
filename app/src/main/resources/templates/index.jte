@@ -3,7 +3,7 @@
 @param BuildUrlPage page = null
 
 @template.layout.page(content = @`
-    <h1 class="text-center">Main Page</h1>
+    <h1 class="text-center">Page Analyzer</h1>
 
     @if(page != null && page.getFlash() != null)
         <div class="alert alert-${page.getFlashType()}" role="alert">

@@ -3,15 +3,18 @@ package hexlet.code.model;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 
 
 @RequiredArgsConstructor
 @Getter
-@Setter
-public class UrlCheck {
+
+public final class UrlCheck {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     Integer id;
     @NonNull Integer statusCode;
     @NonNull String title;

@@ -4,8 +4,6 @@ CREATE TABLE if not exists urls (
     CREATED_AT TIMESTAMP
 );
 
-
-
 CREATE TABLE if not exists url_check (
     ID SERIAL PRIMARY KEY,
     STATUS_CODE INT,
