@@ -1,11 +1,10 @@
 package hexlet.code.repository;
 
 import com.zaxxer.hikari.HikariDataSource;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class BaseRepository {
+    private BaseRepository() {
+        throw new IllegalStateException("Utility class");
+    }
     public static HikariDataSource dataSource;
 }

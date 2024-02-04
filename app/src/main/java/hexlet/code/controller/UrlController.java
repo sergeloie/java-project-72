@@ -1,5 +1,8 @@
 package hexlet.code.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import hexlet.code.dto.url.UrlPage;
 import hexlet.code.dto.url.UrlsPage;
 import hexlet.code.dto.urlcheck.UrlChecksPage;
@@ -34,6 +37,8 @@ import static hexlet.code.util.ResourceRoutes.PAGE_EXIST;
 
 public class UrlController implements CrudHandler {
 
+    private static final Logger logger = LoggerFactory.getLogger(UrlController.class);
+
     /**
      * @param context
      */
@@ -44,7 +49,6 @@ public class UrlController implements CrudHandler {
         try {
             URI uri = new URL(string).toURI();
             String name = Utilities.uriToString(uri);
-//            boolean check = UrlRepository.find(name).isPresent();
             if (UrlRepository.find(name).isPresent()) {
                 context.sessionAttribute(FLASH, PAGE_EXIST);
                 context.sessionAttribute(FLASH_TYPE, "danger");
@@ -61,17 +65,17 @@ public class UrlController implements CrudHandler {
             context.sessionAttribute(FLASH_TYPE, "danger");
             context.redirect(ROOT_PATH);
         } catch (SQLException e) {
-            System.out.println(e.getSQLState());
+            logger.error("Error while saving Url to DB");
         }
     }
 
     /**
      * @param context
      * @param s
-     * method not realized, because not used
      */
     @Override
     public void delete(@NotNull Context context, @NotNull String s) {
+        //method not implemented, because not used
     }
 
     /**
@@ -84,7 +88,7 @@ public class UrlController implements CrudHandler {
         try {
             urls = UrlRepository.getEntities();
         } catch (SQLException e) {
-            System.out.println(e.getSQLState());
+            logger.error("Error when retrieving all Urls");
         }
         UrlsPage page = new UrlsPage(urls);
         context.render("url/index.jte", Collections.singletonMap("page", page));
@@ -103,13 +107,13 @@ public class UrlController implements CrudHandler {
         try {
             url = UrlRepository.find(id).orElseThrow(() -> new NotFoundResponse("Url with ID: " + id + " not found"));
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error when retrieving the Url");
         }
 
         try {
             urlChecks = UrlCheckRepository.getEntities(id);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error when retrieving all Urls");
         }
         UrlPage page = new UrlPage(url);
         UrlChecksPage urlChecksPage = new UrlChecksPage(urlChecks);
@@ -119,9 +123,9 @@ public class UrlController implements CrudHandler {
     /**
      * @param context
      * @param s
-     * method not realized, because not used
      */
     @Override
     public void update(@NotNull Context context, @NotNull String s) {
+        //method not implemented, because not used
     }
 }

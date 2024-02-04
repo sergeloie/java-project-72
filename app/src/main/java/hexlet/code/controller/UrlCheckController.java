@@ -1,5 +1,8 @@
 package hexlet.code.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import hexlet.code.model.UrlCheck;
 import hexlet.code.repository.UrlCheckRepository;
 import hexlet.code.repository.UrlRepository;
@@ -21,6 +24,11 @@ import static hexlet.code.util.ResourceRoutes.FLASH_TYPE;
 import static hexlet.code.util.ResourceRoutes.INCORRECT_ADDRESS;
 
 public class UrlCheckController {
+    private static final Logger logger = LoggerFactory.getLogger(UrlCheckController.class);
+
+    private UrlCheckController() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static void create(Context context) throws SQLException {
 
@@ -45,7 +53,7 @@ public class UrlCheckController {
             try {
                 UrlCheckRepository.save(urlCheck);
             } catch (SQLException e) {
-                System.out.println(e.getSQLState());
+                logger.error("Error while saving urlCheck to DB");
             }
             context.sessionAttribute(FLASH, CHECK_ADDED);
             context.sessionAttribute(FLASH_TYPE, "success");

@@ -6,6 +6,10 @@ import java.time.format.DateTimeFormatter;
 
 public class Utilities {
 
+    private Utilities() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static String uriToString(URI uri) {
         return uri.getScheme() + "://" + uri.getHost()
                 + (uri.getPort() != -1 ? ":" + uri.getPort() : "");
