@@ -24,7 +24,7 @@ import static hexlet.code.util.ResourceRoutes.FLASH_TYPE;
 import static hexlet.code.util.ResourceRoutes.INCORRECT_ADDRESS;
 
 public class UrlCheckController {
-    private static final Logger logger = LoggerFactory.getLogger(UrlCheckController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UrlCheckController.class);
 
     public static void create(Context context) throws SQLException {
 
@@ -49,7 +49,7 @@ public class UrlCheckController {
             try {
                 UrlCheckRepository.save(urlCheck);
             } catch (SQLException e) {
-                logger.error("Error while saving urlCheck to DB");
+                LOGGER.error("Error while saving urlCheck to DB");
             }
             context.sessionAttribute(FLASH, CHECK_ADDED);
             context.sessionAttribute(FLASH_TYPE, "success");

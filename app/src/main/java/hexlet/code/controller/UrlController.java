@@ -37,7 +37,7 @@ import static hexlet.code.util.ResourceRoutes.PAGE_EXIST;
 
 public class UrlController implements CrudHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(UrlController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UrlController.class);
 
     /**
      * @param context
@@ -65,7 +65,7 @@ public class UrlController implements CrudHandler {
             context.sessionAttribute(FLASH_TYPE, "danger");
             context.redirect(ROOT_PATH);
         } catch (SQLException e) {
-            logger.error("Error while saving Url to DB");
+            LOGGER.error("Error while saving Url to DB");
         }
     }
 
@@ -88,7 +88,7 @@ public class UrlController implements CrudHandler {
         try {
             urls = UrlRepository.getEntities();
         } catch (SQLException e) {
-            logger.error("Error when retrieving all Urls");
+            LOGGER.error("Error when retrieving all Urls");
         }
         UrlsPage page = new UrlsPage(urls);
         context.render("url/index.jte", Collections.singletonMap("page", page));
@@ -107,13 +107,13 @@ public class UrlController implements CrudHandler {
         try {
             url = UrlRepository.find(id).orElseThrow(() -> new NotFoundResponse("Url with ID: " + id + " not found"));
         } catch (SQLException e) {
-            logger.error("Error when retrieving the Url");
+            LOGGER.error("Error when retrieving the Url");
         }
 
         try {
             urlChecks = UrlCheckRepository.getEntities(id);
         } catch (SQLException e) {
-            logger.error("Error when retrieving all Urls");
+            LOGGER.error("Error when retrieving all Urls");
         }
         UrlPage page = new UrlPage(url);
         UrlChecksPage urlChecksPage = new UrlChecksPage(urlChecks);
