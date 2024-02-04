@@ -26,10 +26,6 @@ import static hexlet.code.util.ResourceRoutes.INCORRECT_ADDRESS;
 public class UrlCheckController {
     private static final Logger logger = LoggerFactory.getLogger(UrlCheckController.class);
 
-    private UrlCheckController() {
-        throw new IllegalStateException("Utility class");
-    }
-
     public static void create(Context context) throws SQLException {
 
         int urlId = context.pathParamAsClass("url-id", Integer.class).get();

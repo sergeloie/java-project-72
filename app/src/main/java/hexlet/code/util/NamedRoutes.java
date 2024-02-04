@@ -1,9 +1,6 @@
 package hexlet.code.util;
 
 public final class NamedRoutes {
-    private NamedRoutes() {
-        throw new IllegalStateException("Utility class");
-    }
     public static final String ROOT_PATH = "/";
     public static final String URL_PATH = "/urls";
 

@@ -2,10 +2,6 @@ package hexlet.code.util;
 
 public class ResourceRoutes {
 
-    private ResourceRoutes() {
-        throw new IllegalStateException("Utility class");
-    }
-
 
     public static final String BOOTSTRAP_LINK =
         "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css";

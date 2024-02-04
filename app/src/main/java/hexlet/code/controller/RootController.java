@@ -6,9 +6,6 @@ import io.javalin.http.Context;
 import java.util.Collections;
 
 public final class RootController {
-    private RootController() {
-        throw new IllegalStateException("Utility class");
-    }
     public static void show(Context context) {
         BuildUrlPage page = new BuildUrlPage();
         page.setFlash(context.consumeSessionAttribute("flash"));
