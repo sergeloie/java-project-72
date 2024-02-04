@@ -11,6 +11,5 @@ CREATE TABLE if not exists url_check (
     H1 VARCHAR(255),
     DESCRIPTION TEXT,
     URL_ID int not null,
-    FOREIGN KEY (URL_ID) REFERENCES  urls(ID),
     CREATED_AT TIMESTAMP
 );
