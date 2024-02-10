@@ -4,7 +4,6 @@
 */
 package hexlet.code.controller;
 
-import hexlet.code.util.NamedRoutes;
 import kong.unirest.UnirestException;
 import lombok.extern.slf4j.Slf4j;
 

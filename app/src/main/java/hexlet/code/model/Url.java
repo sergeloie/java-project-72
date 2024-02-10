@@ -6,7 +6,10 @@ package hexlet.code.model;
 
 import java.sql.Timestamp;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter

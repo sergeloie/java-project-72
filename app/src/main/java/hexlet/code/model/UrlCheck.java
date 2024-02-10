@@ -7,6 +7,7 @@ package hexlet.code.model;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
@@ -15,10 +16,8 @@ import java.sql.Timestamp;
 @Getter
 
 public final class UrlCheck {
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
+    @Setter
     Integer id;
     @NonNull Integer statusCode;
     @NonNull String title;

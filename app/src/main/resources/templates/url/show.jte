@@ -1,6 +1,5 @@
 @import hexlet.code.dto.url.UrlPage
 @import hexlet.code.dto.urlcheck.UrlChecksPage
-@import hexlet.code.repository.UrlCheckRepository
 @import hexlet.code.util.NamedRoutes
 @import static hexlet.code.util.Utilities.getPrettyDate
 @param UrlPage page
