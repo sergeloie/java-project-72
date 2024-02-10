@@ -1,3 +1,7 @@
+/*
+* This is a personal academic project. Dear PVS-Studio, please check it.
+* PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
+*/
 package hexlet.code;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -10,8 +14,9 @@ import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,21 +30,18 @@ import gg.jte.resolve.ResourceCodeResolver;
 import static io.javalin.apibuilder.ApiBuilder.crud;
 
 public class App {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException {
 
         Javalin app = getApp();
         app.start(getPort());
     }
 
-    public static Javalin getApp() throws SQLException {
+    public static Javalin getApp() throws SQLException, IOException {
 
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(getDatabaseUrl());
         HikariDataSource dataSource = new HikariDataSource(hikariConfig);
-        InputStream inputStream = App.class.getClassLoader().getResourceAsStream("schema.sql");
-        String sql = new BufferedReader(new InputStreamReader(inputStream))
-                .lines()
-                .collect(Collectors.joining("\n"));
+        String sql = readResourceFile("schema.sql");
 
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
@@ -75,7 +77,15 @@ public class App {
     private static void setRoutes(Javalin app) {
 
         app.get(NamedRoutes.ROOT_PATH, RootController::show);
-        app.post("urls/{url-id}/checks", UrlCheckController::create);
-        app.routes(() -> crud("urls/{url-id}", new UrlController()));
+        app.post("urls/{id}/checks", UrlCheckController::create);
+        app.routes(() -> crud("urls/{id}", new UrlController()));
+    }
+
+    private static String readResourceFile(String fileName) throws IOException {
+        var inputStream = App.class.getClassLoader().getResourceAsStream(fileName);
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            return bufferedReader.lines().collect(Collectors.joining("\n"));
+        }
     }
 }

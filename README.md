@@ -12,4 +12,33 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=sergeloie_java-project-72&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=sergeloie_java-project-72)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sergeloie_java-project-72&metric=coverage)](https://sonarcloud.io/summary/new_code?id=sergeloie_java-project-72)
 <br>
-[![Deployed on - Render](https://img.shields.io/badge/Deployed_on-Render-2ea44f?logo=render)](https://sergeloie-jp72.onrender.com/)
+[![Static Badge](https://img.shields.io/badge/Deployed_on_Render-sergeloie--jp72.onrender.com-blue?style=for-the-badge&logo=Render)](https://sergeloie-jp72.onrender.com/)
+
+
+Представляю вашему вниманию Анализатор Страниц.  
+Web-сервис позволяющий собирать и сохранять сведения о сайтах.
+
+Сервис написан на Java с использованием фреймворка Javalin и шаблонизатора JTE.  
+В разработке и тестировании используется БД H2, а в производстве - Postgres.  
+Для отображения фронтенда применяются стили Bootstrap.
+
+Ознакомится с работой сервиса можно по ссылке https://sergeloie-jp72.onrender.com
+
+
+Для локального запуска необходимо склонировать репозиторий
+```
+gh repo clone sergeloie/java-project-72
+```
+Перейти в каталог с приложением
+```
+cd java-project-72
+```
+Скомпилировать код
+```
+make install
+```
+И запустить
+```
+make run-dist
+```
+Открыть в браузере http://localhost:7070

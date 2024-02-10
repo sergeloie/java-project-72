@@ -1,12 +1,18 @@
 @import hexlet.code.dto.url.UrlPage
 @import hexlet.code.dto.urlcheck.UrlChecksPage
-@import hexlet.code.repository.UrlCheckRepository
 @import hexlet.code.util.NamedRoutes
 @import static hexlet.code.util.Utilities.getPrettyDate
 @param UrlPage page
 @param UrlChecksPage urlChecksPage
 
 @template.layout.page(content = @`
+
+    @if(page != null && page.getFlash() != null)
+        <div class="alert alert-${page.getFlashType()}" role="alert">
+            ${page.getFlash()}
+        </div>
+    @endif
+
     @if(page.getUrl() != null)
         <section>
         <h1>

@@ -1,3 +1,7 @@
+/*
+* This is a personal academic project. Dear PVS-Studio, please check it.
+* PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
+*/
 package hexlet.code;
 
 import hexlet.code.repository.UrlRepository;
@@ -26,7 +30,7 @@ public final class CheckTest {
     private static String baseUrl;
 
     @BeforeAll
-    public static void beforeAll() throws SQLException {
+    public static void beforeAll() throws SQLException, IOException {
         app = App.getApp();
         app.start(7070);
         baseUrl = "http://localhost:7070";
@@ -73,6 +77,8 @@ public final class CheckTest {
                 .get(baseUrl + "/urls/" + urlId)
                 .asString()
                 .getBody();
+
+
 
         assertTrue(checkIfUrlCheckPresent.contains("Title test message"));
         assertTrue(checkIfUrlCheckPresent.contains("its description"));

@@ -1,3 +1,7 @@
+/*
+* This is a personal academic project. Dear PVS-Studio, please check it.
+* PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
+*/
 package hexlet.code.repository;
 
 import hexlet.code.model.UrlCheck;
@@ -52,8 +56,10 @@ public class UrlCheckRepository extends BaseRepository {
                 String h1 = resultSet.getString("H1");
                 String description = resultSet.getString("DESCRIPTION");
                 Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
-                UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, timestamp);
+                UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description);
                 urlCheck.setId(id);
+                urlCheck.setUrlId(urlId);
+                urlCheck.setCreatedAt(timestamp);
                 result.add(urlCheck);
             }
         }
