@@ -7,6 +7,13 @@
 @param UrlChecksPage urlChecksPage
 
 @template.layout.page(content = @`
+
+    @if(page != null && page.getFlash() != null)
+        <div class="alert alert-${page.getFlashType()}" role="alert">
+            ${page.getFlash()}
+        </div>
+    @endif
+
     @if(page.getUrl() != null)
         <section>
         <h1>

@@ -128,6 +128,8 @@ public class UrlController implements CrudHandler {
         }
         UrlPage page = new UrlPage(url);
         UrlChecksPage urlChecksPage = new UrlChecksPage(urlChecks);
+        page.setFlash(context.consumeSessionAttribute("flash"));
+        page.setFlashType(context.consumeSessionAttribute("flashType"));
         context.render("url/show.jte", Map.of("page", page, "urlChecksPage", urlChecksPage));
     }
 
