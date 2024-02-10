@@ -105,7 +105,7 @@ public class UrlController implements CrudHandler {
      */
     @Override
     public void getOne(@NotNull Context context, @NotNull String s) {
-        int id = context.pathParamAsClass("url-id", Integer.class).get();
+        int id = context.pathParamAsClass("id", Integer.class).get();
         Url url = null;
         List<UrlCheck> urlChecks = new ArrayList<>();
         try {

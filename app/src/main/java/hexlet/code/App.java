@@ -78,8 +78,8 @@ public class App {
     private static void setRoutes(Javalin app) {
 
         app.get(NamedRoutes.ROOT_PATH, RootController::show);
-        app.post("urls/{url-id}/checks", UrlCheckController::create);
-        app.routes(() -> crud("urls/{url-id}", new UrlController()));
+        app.post("urls/{id}/checks", UrlCheckController::create);
+        app.routes(() -> crud("urls/{id}", new UrlController()));
     }
 
     private static String readResourceFile(String fileName) throws IOException {

@@ -32,7 +32,7 @@ public class UrlCheckController {
 
     public static void create(Context context) throws SQLException {
 
-        int urlId = context.pathParamAsClass("url-id", Integer.class).get();
+        int urlId = context.pathParamAsClass("id", Integer.class).get();
         String address = UrlRepository.find(urlId).get().getName();
 
         HttpResponse<String> response = Unirest.get(address).asString();
