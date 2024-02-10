@@ -66,7 +66,7 @@ public class UrlController implements CrudHandler {
             log.error("Error while checking Url isPresent in DB");
         }
 
-        Url urlToSave = new Url(name, Timestamp.valueOf(LocalDateTime.now()));
+        Url urlToSave = new Url(name);
         try {
             UrlRepository.save(urlToSave);
         } catch (SQLException e) {

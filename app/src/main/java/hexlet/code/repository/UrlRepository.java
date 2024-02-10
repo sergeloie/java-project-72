@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,7 @@ public class UrlRepository extends BaseRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, url.getName());
-            preparedStatement.setTimestamp(2, url.getCreatedAt());
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
             preparedStatement.executeUpdate();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -49,8 +50,9 @@ public class UrlRepository extends BaseRepository {
                 int id = resultSet.getInt("ID");
                 String name = resultSet.getString("NAME");
                 Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
-                Url url = new Url(name, timestamp);
+                Url url = new Url(name);
                 url.setId(id);
+                url.setCreatedAt(timestamp);
                 result.add(url);
             }
         }
@@ -66,8 +68,9 @@ public class UrlRepository extends BaseRepository {
             if (resultSet.next()) {
                 String name = resultSet.getString("NAME");
                 Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
-                Url url = new Url(name, timestamp);
+                Url url = new Url(name);
                 url.setId(id);
+                url.setCreatedAt(timestamp);
                 return Optional.of(url);
             }
         }
@@ -83,8 +86,9 @@ public class UrlRepository extends BaseRepository {
             if (resultSet.next()) {
                 int id = resultSet.getInt("ID");
                 Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
-                Url url = new Url(name, timestamp);
+                Url url = new Url(name);
                 url.setId(id);
+                url.setCreatedAt(timestamp);
                 return Optional.of(url);
             }
         }
