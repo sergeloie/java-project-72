@@ -5,8 +5,6 @@
 package hexlet.code.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import hexlet.code.model.UrlCheck;
 import hexlet.code.repository.UrlCheckRepository;
@@ -23,10 +21,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import static hexlet.code.util.NamedRoutes.getUrlPath;
-import static hexlet.code.util.ResourceRoutes.CHECK_ADDED;
-import static hexlet.code.util.ResourceRoutes.FLASH;
-import static hexlet.code.util.ResourceRoutes.FLASH_TYPE;
-import static hexlet.code.util.ResourceRoutes.INCORRECT_ADDRESS;
 
 @Slf4j
 public class UrlCheckController {
@@ -39,8 +33,8 @@ public class UrlCheckController {
         HttpResponse<String> response = Unirest.get(address).asString();
 
         response.ifFailure(response1 -> {
-            context.sessionAttribute(FLASH, INCORRECT_ADDRESS);
-            context.sessionAttribute(FLASH_TYPE, "danger");
+            context.sessionAttribute("flash", "Некорректный адрес");
+            context.sessionAttribute("flashType", "danger");
             context.redirect(getUrlPath(urlId));
         }).ifSuccess(response1 -> {
             int statusCode = response.getStatus();
@@ -56,8 +50,8 @@ public class UrlCheckController {
             } catch (SQLException e) {
                 log.error("Error while saving urlCheck to DB");
             }
-            context.sessionAttribute(FLASH, CHECK_ADDED);
-            context.sessionAttribute(FLASH_TYPE, "success");
+            context.sessionAttribute("flash", "Страница успешно проверена");
+            context.sessionAttribute("flashType", "success");
             context.redirect(getUrlPath(urlId));
         });
     }

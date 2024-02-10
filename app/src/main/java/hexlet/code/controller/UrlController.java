@@ -5,8 +5,6 @@
 package hexlet.code.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import hexlet.code.dto.url.UrlPage;
 import hexlet.code.dto.url.UrlsPage;
@@ -34,11 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import static hexlet.code.util.NamedRoutes.ROOT_PATH;
-import static hexlet.code.util.ResourceRoutes.FLASH;
-import static hexlet.code.util.ResourceRoutes.FLASH_TYPE;
-import static hexlet.code.util.ResourceRoutes.INCORRECT_URL;
-import static hexlet.code.util.ResourceRoutes.PAGE_ADDED;
-import static hexlet.code.util.ResourceRoutes.PAGE_EXIST;
 
 @Slf4j
 public class UrlController implements CrudHandler {
@@ -54,19 +47,19 @@ public class UrlController implements CrudHandler {
             URI uri = new URL(string).toURI();
             String name = Utilities.uriToString(uri);
             if (UrlRepository.find(name).isPresent()) {
-                context.sessionAttribute(FLASH, PAGE_EXIST);
-                context.sessionAttribute(FLASH_TYPE, "danger");
+                context.sessionAttribute("flash", "Страница уже существует");
+                context.sessionAttribute("flashType", "danger");
                 context.redirect(ROOT_PATH);
                 return;
             }
             Url urlToSave = new Url(name, Timestamp.valueOf(LocalDateTime.now()));
             UrlRepository.save(urlToSave);
-            context.sessionAttribute(FLASH, PAGE_ADDED);
-            context.sessionAttribute(FLASH_TYPE, "success");
+            context.sessionAttribute("flash", "Страница успешно добавлена");
+            context.sessionAttribute("flashType", "success");
             context.redirect(ROOT_PATH);
         } catch (URISyntaxException | MalformedURLException e) {
-            context.sessionAttribute(FLASH, INCORRECT_URL);
-            context.sessionAttribute(FLASH_TYPE, "danger");
+            context.sessionAttribute("flash", "Некорректный URL");
+            context.sessionAttribute("flashType", "danger");
             context.redirect(ROOT_PATH);
         } catch (SQLException e) {
             log.error("Error while saving Url to DB");
