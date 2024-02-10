@@ -4,6 +4,7 @@
 */
 package hexlet.code.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +28,8 @@ import static hexlet.code.util.ResourceRoutes.FLASH;
 import static hexlet.code.util.ResourceRoutes.FLASH_TYPE;
 import static hexlet.code.util.ResourceRoutes.INCORRECT_ADDRESS;
 
+@Slf4j
 public class UrlCheckController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UrlCheckController.class);
 
     public static void create(Context context) throws SQLException {
 
@@ -53,7 +54,7 @@ public class UrlCheckController {
             try {
                 UrlCheckRepository.save(urlCheck);
             } catch (SQLException e) {
-                LOGGER.error("Error while saving urlCheck to DB");
+                log.error("Error while saving urlCheck to DB");
             }
             context.sessionAttribute(FLASH, CHECK_ADDED);
             context.sessionAttribute(FLASH_TYPE, "success");

@@ -4,6 +4,7 @@
 */
 package hexlet.code.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,9 +40,8 @@ import static hexlet.code.util.ResourceRoutes.INCORRECT_URL;
 import static hexlet.code.util.ResourceRoutes.PAGE_ADDED;
 import static hexlet.code.util.ResourceRoutes.PAGE_EXIST;
 
+@Slf4j
 public class UrlController implements CrudHandler {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(UrlController.class);
 
     /**
      * @param context
@@ -69,7 +69,7 @@ public class UrlController implements CrudHandler {
             context.sessionAttribute(FLASH_TYPE, "danger");
             context.redirect(ROOT_PATH);
         } catch (SQLException e) {
-            LOGGER.error("Error while saving Url to DB");
+            log.error("Error while saving Url to DB");
         }
     }
 
@@ -92,7 +92,8 @@ public class UrlController implements CrudHandler {
         try {
             urls = UrlRepository.getEntities();
         } catch (SQLException e) {
-            LOGGER.error("Error when retrieving all Urls");
+
+            log.error("Error when retrieving all Urls");
         }
         UrlsPage page = new UrlsPage(urls);
         context.render("url/index.jte", Collections.singletonMap("page", page));
@@ -111,13 +112,13 @@ public class UrlController implements CrudHandler {
         try {
             url = UrlRepository.find(id).orElseThrow(() -> new NotFoundResponse("Url with ID: " + id + " not found"));
         } catch (SQLException e) {
-            LOGGER.error("Error when retrieving the Url");
+            log.error("Error when retrieving the Url");
         }
 
         try {
             urlChecks = UrlCheckRepository.getEntities(id);
         } catch (SQLException e) {
-            LOGGER.error("Error when retrieving all Urls");
+            log.error("Error when retrieving all Urls");
         }
         UrlPage page = new UrlPage(url);
         UrlChecksPage urlChecksPage = new UrlChecksPage(urlChecks);
