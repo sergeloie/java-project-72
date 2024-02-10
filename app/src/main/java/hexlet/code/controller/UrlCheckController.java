@@ -42,7 +42,9 @@ public class UrlCheckController {
             String description = document.select("meta[name=description]").attr("content");
             Timestamp createdAt = Timestamp.valueOf(LocalDateTime.now());
 
-            UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
+            UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description);
+            urlCheck.setUrlId(urlId);
+            urlCheck.setCreatedAt(createdAt);
             UrlCheckRepository.save(urlCheck);
 
             context.sessionAttribute("flash", "Страница успешно проверена");

@@ -17,14 +17,13 @@ import java.sql.Timestamp;
 
 public final class UrlCheck {
 
-    @Setter
-    Integer id;
+    @Setter Integer id;
     @NonNull Integer statusCode;
     @NonNull String title;
     @NonNull String h1;
     @NonNull String description;
-    @NonNull Integer urlId;
-    @NonNull Timestamp createdAt;
+    @Setter Integer urlId;
+    @Setter Timestamp createdAt;
 
 
 }

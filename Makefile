@@ -16,4 +16,7 @@ lint:
 check:
 	make -C app check
 
+install:
+	make -C app install
+
 .PHONY: build
