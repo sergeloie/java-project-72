@@ -6,12 +6,16 @@ package hexlet.code;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import gg.jte.ContentType;
+import gg.jte.TemplateEngine;
+import gg.jte.resolve.ResourceCodeResolver;
 import hexlet.code.controller.RootController;
 import hexlet.code.controller.UrlCheckController;
 import hexlet.code.controller.UrlController;
 import hexlet.code.repository.BaseRepository;
 import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
+import io.javalin.rendering.template.JavalinJte;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,13 +25,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.stream.Collectors;
-
-import gg.jte.ContentType;
-import gg.jte.TemplateEngine;
-import io.javalin.rendering.template.JavalinJte;
-import gg.jte.resolve.ResourceCodeResolver;
-
-import static io.javalin.apibuilder.ApiBuilder.crud;
 
 public class App {
     public static void main(String[] args) throws SQLException, IOException {
@@ -77,9 +74,7 @@ public class App {
     private static void setRoutes(Javalin app) {
 
         app.get(NamedRoutes.ROOT_PATH, RootController::show);
-//        app.post("urls/{id}/checks", UrlCheckController::create);
         app.post(NamedRoutes.getUrlCheck("{id}"), UrlCheckController::create);
-//        app.routes(() -> crud("urls/{id}", new UrlController()));
         app.post(NamedRoutes.URL_PATH, UrlController::create);
         app.get(NamedRoutes.URL_PATH, UrlController::getAll);
         app.get(NamedRoutes.getUrlPath("{id}"), UrlController::getOne);
