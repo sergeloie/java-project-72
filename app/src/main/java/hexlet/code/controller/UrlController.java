@@ -32,14 +32,14 @@ import java.util.Map;
 import static hexlet.code.util.NamedRoutes.ROOT_PATH;
 
 @Slf4j
-public class UrlController implements CrudHandler {
+public class UrlController {
 
     /**
      * @param context
      */
 
-    @Override
-    public void create(@NotNull Context context) {
+
+    public static void create(Context context) {
         String string = context.formParam("url");
         URI uri;
 
@@ -77,21 +77,13 @@ public class UrlController implements CrudHandler {
 
     }
 
-    /**
-     * @param context
-     * @param s
-     */
-    @Override
-    public void delete(@NotNull Context context, @NotNull String s) {
-        //method not implemented, because not used
-    }
 
     /**
      * @param context
      */
 
-    @Override
-    public void getAll(@NotNull Context context) {
+
+    public static void getAll(Context context) {
         List<Url> urls = null;
         try {
             urls = UrlRepository.getEntities();
@@ -106,10 +98,9 @@ public class UrlController implements CrudHandler {
 
     /**
      * @param context
-     * @param s
      */
-    @Override
-    public void getOne(@NotNull Context context, @NotNull String s) {
+
+    public static void getOne(Context context) {
         int id = context.pathParamAsClass("id", Integer.class).get();
         Url url = null;
         List<UrlCheck> urlChecks = new ArrayList<>();
@@ -129,14 +120,5 @@ public class UrlController implements CrudHandler {
         page.setFlash(context.consumeSessionAttribute("flash"));
         page.setFlashType(context.consumeSessionAttribute("flashType"));
         context.render("url/show.jte", Map.of("page", page, "urlChecksPage", urlChecksPage));
-    }
-
-    /**
-     * @param context
-     * @param s
-     */
-    @Override
-    public void update(@NotNull Context context, @NotNull String s) {
-        //method not implemented, because not used
     }
 }
