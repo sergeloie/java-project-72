@@ -11,8 +11,18 @@ public final class NamedRoutes {
     public static String getUrlPath(int id) {
         return URL_PATH + "/" + id;
     }
+    public static String getUrlPath(String id) {
+        return URL_PATH + "/" + id;
+    }
     public static String getUrlCheck(int id) {
         return URL_PATH + "/" + id + "/checks";
     }
+
+    public static String getUrlCheck(String id) {
+        return URL_PATH + "/" + id + "/checks";
+    }
+
+
+
 
 }
