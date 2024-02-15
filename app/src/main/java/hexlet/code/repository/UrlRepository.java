@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,9 @@ public class UrlRepository extends BaseRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, url.getName());
-            preparedStatement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+            Instant instant = Instant.now();
+            url.setCreatedAt(instant);
+            preparedStatement.setTimestamp(2, Timestamp.from(instant));
             preparedStatement.executeUpdate();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -52,7 +55,7 @@ public class UrlRepository extends BaseRepository {
                 Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
                 Url url = new Url(name);
                 url.setId(id);
-                url.setCreatedAt(timestamp);
+                url.setCreatedAt(timestamp.toInstant());
                 result.add(url);
             }
         }
@@ -70,7 +73,7 @@ public class UrlRepository extends BaseRepository {
                 Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
                 Url url = new Url(name);
                 url.setId(id);
-                url.setCreatedAt(timestamp);
+                url.setCreatedAt(timestamp.toInstant());
                 return Optional.of(url);
             }
         }
@@ -88,7 +91,7 @@ public class UrlRepository extends BaseRepository {
                 Timestamp timestamp = resultSet.getTimestamp("CREATED_AT");
                 Url url = new Url(name);
                 url.setId(id);
-                url.setCreatedAt(timestamp);
+                url.setCreatedAt(timestamp.toInstant());
                 return Optional.of(url);
             }
         }

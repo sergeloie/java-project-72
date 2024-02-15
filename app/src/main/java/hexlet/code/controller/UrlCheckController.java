@@ -40,11 +40,11 @@ public class UrlCheckController {
             Element elementH1 = document.selectFirst("h1");
             String h1 = elementH1 == null ? "" : elementH1.text();
             String description = document.select("meta[name=description]").attr("content");
-            Timestamp createdAt = Timestamp.valueOf(LocalDateTime.now());
+//            Timestamp createdAt = Timestamp.valueOf(LocalDateTime.now());
 
             UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description);
             urlCheck.setUrlId(urlId);
-            urlCheck.setCreatedAt(createdAt);
+//            urlCheck.setCreatedAt(createdAt.toInstant());
             UrlCheckRepository.save(urlCheck);
 
             context.sessionAttribute("flash", "Страница успешно проверена");

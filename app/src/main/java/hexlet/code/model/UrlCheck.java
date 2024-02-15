@@ -9,7 +9,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 
 
 @RequiredArgsConstructor
@@ -23,7 +23,7 @@ public final class UrlCheck {
     @NonNull String h1;
     @NonNull String description;
     @Setter Integer urlId;
-    @Setter Timestamp createdAt;
+    @Setter Instant createdAt;
 
 
 }

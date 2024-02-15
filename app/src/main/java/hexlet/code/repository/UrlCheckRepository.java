@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,9 @@ public class UrlCheckRepository extends BaseRepository {
             preparedStatement.setString(3, urlCheck.getH1());
             preparedStatement.setString(4, urlCheck.getDescription());
             preparedStatement.setInt(5, urlCheck.getUrlId());
-            preparedStatement.setTimestamp(6, urlCheck.getCreatedAt());
+            Instant instant = Instant.now();
+            urlCheck.setCreatedAt(instant);
+            preparedStatement.setTimestamp(6, Timestamp.from(instant));
 
             preparedStatement.executeUpdate();
 
@@ -59,7 +62,7 @@ public class UrlCheckRepository extends BaseRepository {
                 UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description);
                 urlCheck.setId(id);
                 urlCheck.setUrlId(urlId);
-                urlCheck.setCreatedAt(timestamp);
+                urlCheck.setCreatedAt(timestamp.toInstant());
                 result.add(urlCheck);
             }
         }
