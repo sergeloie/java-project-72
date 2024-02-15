@@ -18,7 +18,7 @@ import java.util.List;
 public class UrlCheckRepository extends BaseRepository {
 
     public static void save(UrlCheck urlCheck) throws SQLException {
-        String sql = "INSERT INTO url_check (STATUS_CODE, TITLE, H1, DESCRIPTION, URL_ID, CREATED_AT) "
+        String sql = "INSERT INTO url_checks (STATUS_CODE, TITLE, H1, DESCRIPTION, URL_ID, CREATED_AT) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -41,7 +41,7 @@ public class UrlCheckRepository extends BaseRepository {
     }
 
     public static List<UrlCheck> getEntities(int urlId) throws SQLException {
-        String sql = "SELECT * FROM url_check WHERE URL_ID = ?";
+        String sql = "SELECT * FROM url_checks WHERE URL_ID = ?";
         List<UrlCheck> result = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
