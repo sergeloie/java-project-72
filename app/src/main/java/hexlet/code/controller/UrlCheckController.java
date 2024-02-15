@@ -4,22 +4,19 @@
 */
 package hexlet.code.controller;
 
-import kong.unirest.UnirestException;
-import lombok.extern.slf4j.Slf4j;
-
 import hexlet.code.model.UrlCheck;
 import hexlet.code.repository.UrlCheckRepository;
 import hexlet.code.repository.UrlRepository;
 import io.javalin.http.Context;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
+import kong.unirest.UnirestException;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 import static hexlet.code.util.NamedRoutes.getUrlPath;
 
