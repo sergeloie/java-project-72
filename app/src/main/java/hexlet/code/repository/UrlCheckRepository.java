@@ -12,13 +12,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UrlCheckRepository extends BaseRepository {
 
     public static void save(UrlCheck urlCheck) throws SQLException {
-        String sql = "INSERT INTO url_check (STATUS_CODE, TITLE, H1, DESCRIPTION, URL_ID, CREATED_AT) "
+        String sql = "INSERT INTO url_checks (STATUS_CODE, TITLE, H1, DESCRIPTION, URL_ID, CREATED_AT) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -27,7 +28,9 @@ public class UrlCheckRepository extends BaseRepository {
             preparedStatement.setString(3, urlCheck.getH1());
             preparedStatement.setString(4, urlCheck.getDescription());
             preparedStatement.setInt(5, urlCheck.getUrlId());
-            preparedStatement.setTimestamp(6, urlCheck.getCreatedAt());
+            Instant instant = Instant.now();
+            urlCheck.setCreatedAt(instant);
+            preparedStatement.setTimestamp(6, Timestamp.from(instant));
 
             preparedStatement.executeUpdate();
 
@@ -41,7 +44,7 @@ public class UrlCheckRepository extends BaseRepository {
     }
 
     public static List<UrlCheck> getEntities(int urlId) throws SQLException {
-        String sql = "SELECT * FROM url_check WHERE URL_ID = ?";
+        String sql = "SELECT * FROM url_checks WHERE URL_ID = ?";
         List<UrlCheck> result = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
@@ -59,7 +62,7 @@ public class UrlCheckRepository extends BaseRepository {
                 UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description);
                 urlCheck.setId(id);
                 urlCheck.setUrlId(urlId);
-                urlCheck.setCreatedAt(timestamp);
+                urlCheck.setCreatedAt(timestamp.toInstant());
                 result.add(urlCheck);
             }
         }

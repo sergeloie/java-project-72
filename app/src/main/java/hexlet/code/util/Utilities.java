@@ -6,6 +6,7 @@ package hexlet.code.util;
 
 import java.net.URI;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 
 public class Utilities {
@@ -18,6 +19,12 @@ public class Utilities {
 
     public static String getPrettyDate(Timestamp timestamp) {
         return timestamp
+                .toLocalDateTime()
+                .format(DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm:ss"));
+    }
+
+    public static String getPrettyDate(Instant instant) {
+        return Timestamp.from(instant)
                 .toLocalDateTime()
                 .format(DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm:ss"));
     }

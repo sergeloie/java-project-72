@@ -4,7 +4,7 @@
 */
 package hexlet.code.model;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -17,5 +17,5 @@ import lombok.Setter;
 public class Url {
     private Integer id;
     @NonNull private String name;
-    private Timestamp createdAt;
+    private Instant createdAt;
 }
