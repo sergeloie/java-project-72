@@ -73,9 +73,9 @@ public class UrlController {
 
     public static void getAll(Context context) throws SQLException {
         List<Url> urls = UrlRepository.getEntities();
-        UrlsPage page = new UrlsPage(urls);
+        Map<Integer, UrlCheck> urlChecks = UrlCheckRepository.findLatestCheck();
+        UrlsPage page = new UrlsPage(urls, urlChecks);
         context.render("url/index.jte", Collections.singletonMap("page", page));
-
     }
 
     /**
@@ -86,10 +86,11 @@ public class UrlController {
         int id = context.pathParamAsClass("id", Integer.class).get();
         Url url = UrlRepository.find(id).orElseThrow(() -> new NotFoundResponse("Url with ID: " + id + " not found"));
         List<UrlCheck> urlChecks = UrlCheckRepository.getEntities(id);
-        UrlPage page = new UrlPage(url);
+        UrlPage page = new UrlPage(url, urlChecks);
         UrlChecksPage urlChecksPage = new UrlChecksPage(urlChecks);
         page.setFlash(context.consumeSessionAttribute("flash"));
         page.setFlashType(context.consumeSessionAttribute("flashType"));
-        context.render("url/show.jte", Map.of("page", page, "urlChecksPage", urlChecksPage));
+//        context.render("url/show.jte", Map.of("page", page, "urlChecksPage", urlChecksPage));
+        context.render("url/show.jte", Map.of("page", page));
     }
 }

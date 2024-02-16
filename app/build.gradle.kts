@@ -70,3 +70,9 @@ sonar {
 application {
     mainClass.set("hexlet.code.App")
 }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_20
+    targetCompatibility = JavaVersion.VERSION_20
+}
+
