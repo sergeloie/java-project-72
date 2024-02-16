@@ -58,8 +58,8 @@
                 </thead>
                 <tbody>
                 <!-- Здесь можно добавить строки таблицы -->
-                @if (!urlChecksPage.getUrlChecks().isEmpty())
-                    @for (var urlCheck : urlChecksPage.getUrlChecks())
+                @if (!page.getUrlChecks().isEmpty())
+                    @for (var urlCheck : page.getUrlChecks())
                         <tr>
                             <td>${urlCheck.getId()}</td>
                             <td>${urlCheck.getStatusCode()}</td>

@@ -14,7 +14,9 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UrlCheckRepository extends BaseRepository {
 
@@ -44,7 +46,7 @@ public class UrlCheckRepository extends BaseRepository {
     }
 
     public static List<UrlCheck> getEntities(int urlId) throws SQLException {
-        String sql = "SELECT * FROM url_checks WHERE URL_ID = ?";
+        String sql = "SELECT * FROM url_checks WHERE URL_ID = ? ORDER BY id DESC";
         List<UrlCheck> result = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
@@ -68,6 +70,4 @@ public class UrlCheckRepository extends BaseRepository {
         }
         return result;
     }
-
-
 }
