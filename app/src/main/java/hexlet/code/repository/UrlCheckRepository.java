@@ -14,7 +14,9 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UrlCheckRepository extends BaseRepository {
 
@@ -67,5 +69,29 @@ public class UrlCheckRepository extends BaseRepository {
             }
         }
         return result;
+    }
+
+    public static Map<Integer, UrlCheck> findLatestCheck() throws SQLException {
+        var sql = "SELECT DISTINCT ON (url_id) * from url_checks order by url_id DESC, id DESC";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            var resultSet = preparedStatement.executeQuery();
+            var result = new HashMap<Integer, UrlCheck>();
+            while (resultSet.next()) {
+                var id = resultSet.getInt("ID");
+                var urlId = resultSet.getInt("URL_ID");
+                int statusCode = resultSet.getInt("STATUS_CODE");
+                String title = resultSet.getString("TITLE");
+                String h1 = resultSet.getString("H1");
+                String description = resultSet.getString("DESCRIPTION");
+                Instant instant = resultSet.getTimestamp("CREATED_AT").toInstant();
+                var urlCheck = new UrlCheck(statusCode, title, h1, description);
+                urlCheck.setId(id);
+                urlCheck.setUrlId(urlId);
+                urlCheck.setCreatedAt(instant);
+                result.put(urlId, urlCheck);
+            }
+            return result;
+        }
     }
 }

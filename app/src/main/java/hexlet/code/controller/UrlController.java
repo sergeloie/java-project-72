@@ -73,9 +73,9 @@ public class UrlController {
 
     public static void getAll(Context context) throws SQLException {
         List<Url> urls = UrlRepository.getEntities();
-        UrlsPage page = new UrlsPage(urls);
+        Map<Integer, UrlCheck> urlChecks = UrlCheckRepository.findLatestCheck();
+        UrlsPage page = new UrlsPage(urls, urlChecks);
         context.render("url/index.jte", Collections.singletonMap("page", page));
-
     }
 
     /**

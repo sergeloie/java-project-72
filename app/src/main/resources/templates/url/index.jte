@@ -10,6 +10,14 @@
 @template.layout.page(content = @`
     <meta about="All urls page">
     <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="col-1">ID</th>
+            <th>Name</th>
+            <th class="col-2">Latest Check</th>
+            <th class="col-1">Status Code</th>
+        </tr>
+        </thead>
         @for(Url url : page.getUrls())
             <tr>
                 <td>
@@ -19,7 +27,14 @@
                     <a href="${getUrlPath(url.getId())}">${url.getName()}</a>
                 </td>
                 <td>
-                    ${getPrettyDate(url.getCreatedAt())}
+                    @if(page.getLatestChecks().containsKey(url.getId()))
+                    ${getPrettyDate(page.getLatestChecks().get(url.getId()).getCreatedAt())}
+                    @endif
+                </td>
+                <td>
+                    @if(page.getLatestChecks().containsKey(url.getId()))
+                        ${page.getLatestChecks().get(url.getId()).getStatusCode()}
+                    @endif
                 </td>
             </tr>
         @endfor
