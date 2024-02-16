@@ -8,6 +8,7 @@
 
 
 @template.layout.page(content = @`
+    <meta about="All urls page">
     <table class="table table-striped">
         @for(Url url : page.getUrls())
             <tr>

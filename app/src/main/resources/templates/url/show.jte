@@ -6,7 +6,7 @@
 @param UrlChecksPage urlChecksPage
 
 @template.layout.page(content = @`
-
+<meta about="Single url page">
     @if(page != null && page.getFlash() != null)
         <div class="alert alert-${page.getFlashType()}" role="alert">
             ${page.getFlash()}
