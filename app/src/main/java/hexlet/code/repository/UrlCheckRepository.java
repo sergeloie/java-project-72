@@ -72,20 +72,20 @@ public class UrlCheckRepository extends BaseRepository {
     }
 
     public static Map<Integer, UrlCheck> findLatestCheck() throws SQLException {
-        var sql = "SELECT DISTINCT ON (url_id) * from url_checks order by url_id DESC, id DESC";
+        String sql = "SELECT DISTINCT ON (url_id) * from url_checks order by url_id DESC, id DESC";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            var resultSet = preparedStatement.executeQuery();
-            var result = new HashMap<Integer, UrlCheck>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            HashMap<Integer, UrlCheck> result = new HashMap<Integer, UrlCheck>();
             while (resultSet.next()) {
-                var id = resultSet.getInt("ID");
-                var urlId = resultSet.getInt("URL_ID");
+                int id = resultSet.getInt("ID");
+                int urlId = resultSet.getInt("URL_ID");
                 int statusCode = resultSet.getInt("STATUS_CODE");
                 String title = resultSet.getString("TITLE");
                 String h1 = resultSet.getString("H1");
                 String description = resultSet.getString("DESCRIPTION");
                 Instant instant = resultSet.getTimestamp("CREATED_AT").toInstant();
-                var urlCheck = new UrlCheck(statusCode, title, h1, description);
+                UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description);
                 urlCheck.setId(id);
                 urlCheck.setUrlId(urlId);
                 urlCheck.setCreatedAt(instant);
